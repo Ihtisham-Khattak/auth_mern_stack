@@ -2,6 +2,9 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 require("dotenv").config();
+const UserModel = require('./model/index.js');
+const bcrypt = require("bcrypt")
+
 
 const app = express();
 app.use(cors());
@@ -37,7 +40,10 @@ app.get("/", (req, res) => {
 
 app.post("/register", (req, res) => {
     const {email, password} = req.body;
-    
+    // hading the password
+    bcrypt.hashSync(password, 10)
+    const user = new UserModel({})
+
 })
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
